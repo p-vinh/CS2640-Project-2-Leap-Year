@@ -103,7 +103,7 @@ else:
 	syscall
 
 endif2:
-	li	$t4, 14			# a = $t3
+	li	$t4, 14		# a = $t3
 	sub	$t3, $t4, $t0		# $t3 = 14 - month
 	div	$t3, $t3, 12		# $t3 = $t3 / 12
 
@@ -112,6 +112,27 @@ endif2:
 	mul	$t3, $t3, 12		# m = $t3 Don't need 'a' because it is no longer needed for calculations
 	add	$t3, $t3, $t0
 	sub	$t3, $t3, 2
+
+	
+	add	$t5, $t1, $t4		# $t5 = day + year
+
+	div	$t6, $t4, 4		
+	add	$t5, $t5, $t6
+
+	div	$t6, $t4, 100
+	sub	$t5, $t5, $t6
+
+	div	$t6, $t4, 400
+	add	$t5, $t5, $t6
+
+	mul	$t6, $t0, 31
+	div	$t6, $t6, 12
+	add	$t5, $t5, $t6
+
+	rem	$t5, $t5, 7
+
+	
+	
 
 
 	

@@ -59,13 +59,13 @@ main:
 
 
 
-	li	$t3, 4
-	rem	$t4, $t2, $t3
 
-	bne	$t4, 0, endif		# if remainder != 0 else endif
-	li	$t3, 100
-	rem	$t4, $t2, $t3		# year / 100
-	bne	$t4, 2, endif		# if remainder != 1 else endif
+	rem	$t4, $t2, 4
+
+	bne	$t4, 0, endif		# if remainder != 0 else goto endif
+
+	rem	$t4, $t2, 100		
+	beqz	$t4, endif		# if remainder == 0 else goto endif
 
 	move	$a0, $t2		# Printing out leap
 	li	$v0, 1
@@ -73,11 +73,11 @@ main:
 	la	$a0, leap
 	li	$v0, 4
 	syscall
+	b	endif2
 endif:
 
-	li	$t3, 400
-	rem	$t4, $t2, $t3
-	bne	$t4, 0, else		# if remainder != 0 else endif2
+	rem	$t4, $t2, 400
+	bnez	$t4, else		# if remainder != 0 else endif2
 
 	move	$a0, $t2		# Printing out leap
 	li	$v0, 1
@@ -96,6 +96,7 @@ else:
 	syscall
 
 endif2:
+
 	li	$t4, 14			# a = $t3 (Calculations for a)
 	sub	$t3, $t4, $t0
 	div	$t3, $t3, 12
@@ -104,7 +105,7 @@ endif2:
 
 					# Calculations for m
 	mul	$t3, $t3, 12		# m = $t3 Don't need 'a' because it is no longer needed for calculations
-	add	$t3, $t3, 10
+	add	$t3, $t3, $t0
 	sub	$t3, $t3, 2
 
 

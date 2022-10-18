@@ -106,7 +106,8 @@ endif2:
 					# Calculations for m
 	mul	$t3, $t3, 12		# m = $t3 Don't need 'a' because it is no longer needed for calculations
 	add	$t3, $t3, $t0
-	sub	$t3, $t3, 2
+	li	$t7, 2
+	sub	$t3, $t3, $t8
 
 
 	add	$t5, $t1, $t4		# Calculation for d

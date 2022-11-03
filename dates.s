@@ -140,6 +140,8 @@ endif2:
 	syscall
 
 
+# changes i would do - turn this into an array search instead
+
 	bnez	$t5, endif3		# Looking for the day of the week
 	la	$a0, sunday
 	li	$v0, 4
